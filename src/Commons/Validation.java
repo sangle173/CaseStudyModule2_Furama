@@ -8,6 +8,7 @@ import Models.Room;
 import Models.Villa;
 
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Validation {
@@ -16,7 +17,7 @@ public class Validation {
     private static final String ID_ROOM_REGEX = "^SVRO-\\d{4}$";
     private static final String TEXT_REGEX = "^[A-Z][a-z]*(\\s[A-Z][a-z]*)*$";
     private static final String FREE_SERVICE_REGEX = "^(massage|karaoke|food|drink|car)$";
-    private static final String BIRTHDAY_REGEX = "^([0-2][1-9]|[1-3]0|31)/(0[1-9]|1[0-2])/(190[1-9]|19[1-9]\\d|2\\d{3})$";
+    private static final String BIRTHDAY_REGEX = "^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/((19|20)\\d\\d)$";
     private static final String GENDER_REGEX = "^(Male|Female|Unknown)$";
     private static final String ID_CARD_REGEX = "^[0-9]{3}[0-9]{3}[0-9]{3}$";
     private static final String PHONE_REGEX = "^0[0-9]{9}$";
@@ -162,15 +163,48 @@ public class Validation {
             return false;
         }
     }
+    
+    public boolean validateCustomerBirthday(String date) {
+        Pattern pattern = Pattern.compile(BIRTHDAY_REGEX);
+        Matcher matcher = pattern.matcher(date);
+        if (matcher.matches()) {
+            matcher.reset();
+            if (matcher.find()) {
+                String day = matcher.group(1);
+                String month = matcher.group(2);
+                int year = Integer.parseInt(matcher.group(3));
+                if (year < 1990 || year > 2003) {
+                    System.out.println("The year must to from 1900 to 2003");
+                    return false;
+                }
+                if (day.equals("31") && (month.equals("4") || month.equals("6") || month.equals("9") || month.equals("11") || month.equals("04") || month.equals("06") || month.equals("09"))) {
+                    System.out.println("only 1,3,5,7,8,10,12 has 31 days");
+                    return false;
+                } else if (month.equals("2") || month.equals("02")) {
+                    //leap year
+                    if (year % 4 == 0) {
 
-    public boolean validateCustomerBirthday(String customerBirthDay) {
-        try {
-            if (Pattern.matches(BIRTHDAY_REGEX, customerBirthDay)) {
-                return true;
+                        if (day.equals("30") || day.equals("31")) {
+                            System.out.println("February just has 29 or 28 day/per month");
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    } else if (day.equals("29") || day.equals("30") || day.equals("31")) {
+                        System.out.println("The year " + year + " not a leap year so February just has 28/per month");
+                        return false;
+                    } else {
+                        return true;
+                    }
+                } else {
+                    return true;
+                }
+            } else {
+                System.out.println("Birthday must to be same format dd/MM/yyyy");
+                return false;
             }
-            throw new Exception("The birthday must be dd/MM/yyyy with yyyy greater than 1900");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } else {
+            System.out.println("Birthday must to be same format dd/MM/yyyy with dd from 1-31, MM from 1-12, yyyy form 1900- 2003");
             return false;
         }
     }
