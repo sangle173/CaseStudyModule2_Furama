@@ -1,9 +1,9 @@
 package Controllers;
 
 import Commons.FuncWritingReading;
+import Commons.Standardized;
 import Commons.Validation;
 import Models.Customer;
-import Models.Villa;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,6 +13,7 @@ import java.util.Scanner;
 public class CustomerManagement implements CRUDService<Customer> {
     FuncWritingReading funcWritingReading = new FuncWritingReading();
     Scanner scanner = new Scanner(System.in);
+    Standardized standardized =new Standardized();
     Validation validation = new Validation();
 
     @Override
@@ -165,7 +166,7 @@ public class CustomerManagement implements CRUDService<Customer> {
             System.out.println("Enter customer gender");
             String customerGender = scanner.nextLine().trim();
             if (validation.validateCustomerGender(customerGender)) {
-                return customerGender;
+                return standardized.standardizedDate(customerGender);
             }
         } while (true);
     }

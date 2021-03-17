@@ -4,8 +4,8 @@ public class Customer implements Comparable<Customer> {
     private String customerName;
     private String customerBirthDay;
     private String customerGender;
-    private int customerIdCard;
-    private int customerPhone;
+    private String customerIdCard;
+    private String customerPhone;
     private String customerEmail;
     private String customerType;
     private String customerAddress;
@@ -14,7 +14,8 @@ public class Customer implements Comparable<Customer> {
     public Customer() {
     }
 
-    public Customer(String customerName, String customerBirthDay, String customerGender, int customerIdCard, int customerPhone, String customerEmail, String customerType, String customerAddress) {
+    public Customer(String customerName, String customerBirthDay, String customerGender, String customerIdCard,
+                    String customerPhone, String customerEmail, String customerType, String customerAddress) {
         this.customerName = customerName;
         this.customerBirthDay = customerBirthDay;
         this.customerGender = customerGender;
@@ -25,20 +26,8 @@ public class Customer implements Comparable<Customer> {
         this.customerAddress = customerAddress;
     }
 
-    public Customer(String[] customerInfo) {
-        this.customerName = customerInfo[0];
-        this.customerBirthDay = customerInfo[1];
-        this.customerGender = customerInfo[2];
-        this.customerIdCard = Integer.parseInt(customerInfo[3]);
-        this.customerPhone = Integer.parseInt(customerInfo[4]);
-        this.customerEmail = customerInfo[5];
-        this.customerType = customerInfo[6];
-        this.customerAddress = customerInfo[7];
-    }
-
-
-    public Customer(String customerName, String customerBirthDay, String customerGender, int customerIdCard, int customerPhone, String customerEmail, String customerType,
-                    String customerAddress, Service customerService) {
+    public Customer(String customerName, String customerBirthDay, String customerGender, String customerIdCard, String customerPhone,
+                    String customerEmail, String customerType, String customerAddress, Service customerService) {
         this.customerName = customerName;
         this.customerBirthDay = customerBirthDay;
         this.customerGender = customerGender;
@@ -48,6 +37,17 @@ public class Customer implements Comparable<Customer> {
         this.customerType = customerType;
         this.customerAddress = customerAddress;
         this.customerService = customerService;
+    }
+
+    public Customer(String[] customerInfo) {
+        this.customerName = customerInfo[0];
+        this.customerBirthDay = customerInfo[1];
+        this.customerGender = customerInfo[2];
+        this.customerIdCard = customerInfo[3];
+        this.customerPhone = customerInfo[4];
+        this.customerEmail = customerInfo[5];
+        this.customerType = customerInfo[6];
+        this.customerAddress = customerInfo[7];
     }
 
     public String getCustomerName() {
@@ -74,12 +74,20 @@ public class Customer implements Comparable<Customer> {
         this.customerGender = customerGender;
     }
 
-    public int getCustomerIdCard() {
+    public String getCustomerIdCard() {
         return customerIdCard;
     }
 
-    public void setCustomerIdCard(int customerIdCard) {
+    public void setCustomerIdCard(String customerIdCard) {
         this.customerIdCard = customerIdCard;
+    }
+
+    public String getCustomerPhone() {
+        return customerPhone;
+    }
+
+    public void setCustomerPhone(String customerPhone) {
+        this.customerPhone = customerPhone;
     }
 
     public String getCustomerEmail() {
@@ -112,14 +120,6 @@ public class Customer implements Comparable<Customer> {
 
     public void setCustomerService(Service customerService) {
         this.customerService = customerService;
-    }
-
-    public int getCustomerPhone() {
-        return customerPhone;
-    }
-
-    public void setCustomerPhone(int customerPhone) {
-        this.customerPhone = customerPhone;
     }
 
     @Override

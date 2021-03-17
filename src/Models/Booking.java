@@ -10,7 +10,7 @@ public class Booking {
     }
 
     public Booking(String[] bookingInfo) {
-        this.customer = new Customer(bookingInfo[0], bookingInfo[1], bookingInfo[2], Integer.parseInt(bookingInfo[3]), Integer.parseInt(bookingInfo[4]), bookingInfo[5], bookingInfo[6], bookingInfo[7]);
+        this.customer = new Customer(bookingInfo[0], bookingInfo[1], bookingInfo[2], bookingInfo[3], bookingInfo[4], bookingInfo[5], bookingInfo[6], bookingInfo[7]);
         if (bookingInfo.length == 18) {
             this.service = new Villa(bookingInfo[8], bookingInfo[9], Double.parseDouble(bookingInfo[10]), Double.parseDouble(bookingInfo[11]),
                     Integer.parseInt(bookingInfo[12]), bookingInfo[13], bookingInfo[14], bookingInfo[15], Double.parseDouble(bookingInfo[16]), Integer.parseInt(bookingInfo[17]));

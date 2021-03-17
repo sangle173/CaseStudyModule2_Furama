@@ -18,9 +18,9 @@ public class Validation {
     private static final String TEXT_REGEX = "^[A-Z][a-z]*(\\s[A-Z][a-z]*)*$";
     private static final String FREE_SERVICE_REGEX = "^(massage|karaoke|food|drink|car)$";
     private static final String BIRTHDAY_REGEX = "^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/((19|20)\\d\\d)$";
-    private static final String GENDER_REGEX = "^(Male|Female|Unknown)$";
+    private static final String GENDER_REGEX = "^(male|female|unknown)$";
     private static final String ID_CARD_REGEX = "^[0-9]{3}[0-9]{3}[0-9]{3}$";
-    private static final String PHONE_REGEX = "^0[0-9]{9}$";
+    private static final String PHONE_REGEX = "^0{1}[0-9]{9}$";
     private static final String EMAIL_REGEX = "^[a-z][a-z0-9_\\.]{5,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,4}){1,2}$";
 
 
@@ -163,7 +163,7 @@ public class Validation {
             return false;
         }
     }
-    
+
     public boolean validateCustomerBirthday(String date) {
         Pattern pattern = Pattern.compile(BIRTHDAY_REGEX);
         Matcher matcher = pattern.matcher(date);
@@ -173,7 +173,7 @@ public class Validation {
                 String day = matcher.group(1);
                 String month = matcher.group(2);
                 int year = Integer.parseInt(matcher.group(3));
-                if (year < 1990 || year > 2003) {
+                if (year < 1900 || year > 2003) {
                     System.out.println("The year must to from 1900 to 2003");
                     return false;
                 }

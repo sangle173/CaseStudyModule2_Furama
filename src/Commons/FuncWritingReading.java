@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FuncWritingReading<E> {
-    private static final String PATH = "D:\\Case_Study_Module2_Furama\\src\\Data\\";
+    private static final String PATH = "D:\\CaseStudyModule2_Furama\\src\\Data\\";
 
     public void writeToFile(String fileName, List<E> list, boolean writeMode) {
         File file = new File(PATH + fileName);
