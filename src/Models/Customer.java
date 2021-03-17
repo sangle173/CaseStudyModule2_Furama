@@ -1,6 +1,7 @@
 package Models;
 
 public class Customer implements Comparable<Customer> {
+    public static final String COMMA = ",";
     private String customerName;
     private String customerBirthDay;
     private String customerGender;
@@ -124,13 +125,13 @@ public class Customer implements Comparable<Customer> {
 
     @Override
     public String toString() {
-        String string = customerName + "," +
-                customerBirthDay + "," +
-                customerGender + "," +
-                customerIdCard + "," +
-                customerPhone + "," +
-                customerEmail + "," +
-                customerType + "," +
+        String string = customerName + COMMA +
+                customerBirthDay + COMMA +
+                customerGender + COMMA +
+                customerIdCard + COMMA +
+                customerPhone + COMMA +
+                customerEmail + COMMA +
+                customerType + COMMA +
                 customerAddress;
         if (customerService != null) {
             string = string + "," + customerService.getServiceId();

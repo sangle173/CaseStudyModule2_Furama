@@ -1,6 +1,7 @@
 package Models;
 
 public abstract class Service implements Comparable<Service> {
+    public static final String COMMA = ",";
     private String serviceId;
     private String serviceName;
     private double usingArea;

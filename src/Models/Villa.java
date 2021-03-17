@@ -66,10 +66,10 @@ public class Villa extends Service {
 
     @Override
     public String toString() {
-        return super.toString() + "," +
-                roomStandard + "," +
-                otherUtilities + "," +
-                areaOfPool + "," +
+        return super.toString() + COMMA +
+                roomStandard + COMMA +
+                otherUtilities + COMMA +
+                areaOfPool + COMMA +
                 noOfFloors;
     }
 

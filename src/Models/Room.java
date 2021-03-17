@@ -31,7 +31,7 @@ public class Room extends Service {
 
     @Override
     public String toString() {
-        return super.toString() + "," +
+        return super.toString() + COMMA +
                 freeService;
     }
 

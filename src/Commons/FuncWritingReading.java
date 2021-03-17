@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FuncWritingReading<E> {
+    public static final String COMMA = ",";
     private static final String PATH = "D:\\CaseStudyModule2_Furama\\src\\Data\\";
 
     public void writeToFile(String fileName, List<E> list, boolean writeMode) {
@@ -43,7 +44,7 @@ public class FuncWritingReading<E> {
             String line = "";
             String[] temp;
             while ((line = bufferedReader.readLine()) != null) {
-                temp = line.split(",");
+                temp = line.split(COMMA);
                 list.add(temp);
             }
         } catch (IOException e) {

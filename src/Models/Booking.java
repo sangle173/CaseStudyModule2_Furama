@@ -1,10 +1,12 @@
 package Models;
 
 public class Booking {
+    public static final String COMMA = ",";
     private Customer customer;
     private Service service;
 
     public Booking(Customer customer, Service service) {
+
         this.customer = customer;
         this.service = service;
     }
@@ -41,7 +43,7 @@ public class Booking {
 
     @Override
     public String toString() {
-        return customer.toString() + "," +
+        return customer.toString() + COMMA +
                 service.toString();
     }
 
