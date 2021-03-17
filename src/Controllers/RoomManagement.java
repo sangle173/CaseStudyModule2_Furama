@@ -2,6 +2,7 @@ package Controllers;
 
 import Commons.FuncWritingReading;
 import Commons.Validation;
+import Models.House;
 import Models.Room;
 import Models.Villa;
 
@@ -50,15 +51,18 @@ public class RoomManagement implements CRUDService<Room> {
     @Override
     public void searchById() {
         List<Room> roomList = read();
-        String idServiceSearch = inputServiceId();
-        for (Room room : roomList) {
-            if (room.getServiceId().equals(idServiceSearch)) {
-                System.out.println("The room information you want to search is: ");
-                System.out.println(room.showInfo());
-                return;
+        do {
+            System.out.println("Enter the Room Id");
+            String idRoom = scanner.nextLine();
+            for (Room room : roomList) {
+                if (idRoom.equals(room.getServiceId())) {
+                    System.out.println("The room information of Villa " + idRoom + " want to search is: ");
+                    System.out.println(room.showInfo());
+                    return;
+                }
             }
-        }
-        System.out.println("The id service not available");
+            System.out.println("The Id Room not available");
+        } while (true);
     }
 
     @Override
@@ -106,13 +110,47 @@ public class RoomManagement implements CRUDService<Room> {
     }
 
     @Override
-    public void update(Room room, String id) {
-
+    public void update() {
+        List<Room> roomList = read();
+        do {
+            System.out.println("Enter Room id");
+            String roomId=scanner.nextLine();
+            for (int i = 0; i <roomList.size() ; i++) {
+                if (roomId.equals(roomList.get(i).getServiceId())){
+                    System.out.println("Please update the room "+roomId+" with new information");
+                    String serviceId = roomId;
+                    List<String> listPropeties = serviceManagement.addProperties();
+                    listPropeties.add(0, serviceId);
+                    String freeService = serviceManagement.inputFreeService();
+                    listPropeties.add(freeService);
+                    String[] roomInfo = listPropeties.toArray(new String[0]);
+                    Room room = new Room(roomInfo);
+                    roomList.set(i,room);
+                    funcWritingReading.writeToFile("Room.csv",roomList,false);
+                    System.out.println("Have been updated");
+                    return;
+                }
+            }
+            System.out.println("The Room Id not available");
+        }while (true);
     }
 
     @Override
-    public void delete(String id) {
-
+    public void delete() {
+        List<Room> roomList = read();
+        do {
+            System.out.println("Enter Room id");
+            String roomId=scanner.nextLine();
+            for (int i = 0; i <roomList.size() ; i++) {
+                if (roomId.equals(roomList.get(i).getServiceId())){
+                    roomList.remove(i);
+                    funcWritingReading.writeToFile("Room.csv",roomList,false);
+                    System.out.println("Have been deleted");
+                    return;
+                }
+            }
+            System.out.println("The Room Id not available");
+        }while (true);
     }
 
     public String inputServiceId() {

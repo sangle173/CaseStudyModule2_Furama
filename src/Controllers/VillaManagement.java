@@ -51,15 +51,18 @@ public class VillaManagement implements CRUDService<Villa> {
     @Override
     public void searchById() {
         List<Villa> villaList = read();
-        String idServiceSearch = inputServiceId();
-        for (Villa villa : villaList) {
-            if (villa.getServiceId().equals(idServiceSearch)) {
-                System.out.println("The villa information you want to search is: ");
-                System.out.println(villa.showInfo());
-                return;
+        do {
+            System.out.println("Enter the Villa Id");
+            String idVilla = scanner.nextLine();
+            for (Villa villa : villaList) {
+                if (idVilla.equals(villa.getServiceId())) {
+                    System.out.println("The villa information of Villa " + idVilla + " want to search is: ");
+                    System.out.println(villa.showInfo());
+                    return;
+                }
             }
-        }
-        System.out.println("The id service not available");
+            System.out.println("The Id Villa not available");
+        } while (true);
     }
 
     @Override
@@ -114,13 +117,53 @@ public class VillaManagement implements CRUDService<Villa> {
 
 
     @Override
-    public void update(Villa villa, String id) {
-
+    public void update() {
+        List<Villa> villaList = read();
+        do {
+            System.out.println("Enter Villa id");
+            String villaId = scanner.nextLine();
+            for (int i = 0; i < villaList.size(); i++) {
+                if (villaId.equals(villaList.get(i).getServiceId())) {
+                    System.out.println("Please update the villa " + villaId + " with new information");
+                    String serviceId = villaId;
+                    List<String> listPropeties = serviceManagement.addProperties();
+                    listPropeties.add(0, serviceId);
+                    String roomStandard = serviceManagement.inputRoomStandard();
+                    listPropeties.add(roomStandard);
+                    String otherUtilities = serviceManagement.inputOtherUtilities();
+                    listPropeties.add(otherUtilities);
+                    String areaOfPool = serviceManagement.inputAreaOfPool();
+                    listPropeties.add(areaOfPool);
+                    String noOfFloors = serviceManagement.inputNoOfFloors();
+                    listPropeties.add(noOfFloors);
+                    String[] villaInfo = listPropeties.toArray(new String[0]);
+                    Villa villa = new Villa(villaInfo);
+                    villaList.set(i, villa);
+                    funcWritingReading.writeToFile("Villa.csv", villaList, false);
+                    System.out.println("Have been updated");
+                    return;
+                }
+            }
+            System.out.println("The Villa Id not available");
+        } while (true);
     }
 
     @Override
-    public void delete(String id) {
-
+    public void delete() {
+        List<Villa> villaList = read();
+        do {
+            System.out.println("Enter Villa id");
+            String villaId = scanner.nextLine();
+            for (int i = 0; i < villaList.size(); i++) {
+                if (villaId.equals(villaList.get(i).getServiceId())) {
+                    villaList.remove(i);
+                    funcWritingReading.writeToFile("Villa.csv", villaList, false);
+                    System.out.println("Have been deleted");
+                    return;
+                }
+            }
+            System.out.println("The Villa Id not available");
+        } while (true);
     }
 
     public String inputServiceId() {

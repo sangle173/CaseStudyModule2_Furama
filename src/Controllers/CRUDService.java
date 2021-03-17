@@ -16,7 +16,7 @@ public interface CRUDService<E> {
 
     void add() throws NameException, EmailException, GenderException, IdCardException, BirthdayException;
 
-    void update(E e, String id);
+    void update() throws NameException, BirthdayException, GenderException, IdCardException, EmailException;
 
-    void delete(String id);
+    void delete();
 }

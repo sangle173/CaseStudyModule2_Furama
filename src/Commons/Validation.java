@@ -30,8 +30,8 @@ public class Validation {
             if (Pattern.matches(ID_VILLA_REGEX, id)) {
                 List<Villa> villaList = new VillaManagement().read();
                 for (Villa villa : villaList) {
-                    if (villa.getServiceId().equals(id)) {
-                        throw new Exception("Id service is available");
+                    if (id.equals(villa.getServiceId())) {
+                        throw new Exception("Id service is available, you must to input other Id");
                     }
                 }
                 return true;

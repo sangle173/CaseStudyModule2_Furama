@@ -33,6 +33,7 @@ public class HouseManagement implements CRUDService<House> {
             count++;
         }
     }
+
     public void showNotDuplicate() {
         List<String[]> list = funcWritingReading.readFromFile("House.csv");
         Set<House> houseTreeSet = new TreeSet<>();
@@ -50,15 +51,18 @@ public class HouseManagement implements CRUDService<House> {
     @Override
     public void searchById() {
         List<House> houseList = read();
-        String idServiceSearch = inputServiceId();
-        for (House house : houseList) {
-            if (house.getServiceId().equals(idServiceSearch)) {
-                System.out.println("The house information you want to search is: ");
-                System.out.println(house.showInfo());
-                return;
+        do {
+            System.out.println("Enter the House Id");
+            String idHouse = scanner.nextLine();
+            for (House house : houseList) {
+                if (idHouse.equals(house.getServiceId())) {
+                    System.out.println("The room information of Villa " + idHouse + " want to search is: ");
+                    System.out.println(house.showInfo());
+                    return;
+                }
             }
-        }
-        System.out.println("The id service not available");
+            System.out.println("The Id House not available");
+        } while (true);
     }
 
 
@@ -111,13 +115,51 @@ public class HouseManagement implements CRUDService<House> {
     }
 
     @Override
-    public void update(House house, String id) {
-
+    public void update() {
+        List<House> houseList = read();
+        do {
+            System.out.println("Enter House id");
+            String houseId = scanner.nextLine();
+            for (int i = 0; i < houseList.size(); i++) {
+                if (houseId.equals(houseList.get(i).getServiceId())) {
+                    System.out.println("Please update the house " + houseId + " with new information");
+                    String serviceId = houseId;
+                    List<String> listPropeties = serviceManagement.addProperties();
+                    listPropeties.add(0, serviceId);
+                    String roomStandard = serviceManagement.inputRoomStandard();
+                    listPropeties.add(roomStandard);
+                    String otherUtilities = serviceManagement.inputOtherUtilities();
+                    listPropeties.add(otherUtilities);
+                    String noOfFloors = serviceManagement.inputNoOfFloors();
+                    listPropeties.add(noOfFloors);
+                    String[] houseInfo = listPropeties.toArray(new String[0]);
+                    House house = new House(houseInfo);
+                    houseList.set(i, house);
+                    funcWritingReading.writeToFile("House.csv", houseList, false);
+                    System.out.println("Have been updated");
+                    return;
+                }
+            }
+            System.out.println("The House Id not available");
+        } while (true);
     }
 
     @Override
-    public void delete(String id) {
-
+    public void delete() {
+        List<House> houseList = read();
+        do {
+            System.out.println("Enter House id");
+            String houseId = scanner.nextLine();
+            for (int i = 0; i < houseList.size(); i++) {
+                if (houseId.equals(houseList.get(i).getServiceId())) {
+                    houseList.remove(i);
+                    funcWritingReading.writeToFile("Villa.csv", houseList, false);
+                    System.out.println("Have been deleted");
+                    return;
+                }
+            }
+            System.out.println("The House Id not available");
+        } while (true);
     }
 
     public String inputServiceId() {

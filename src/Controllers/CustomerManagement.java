@@ -2,6 +2,7 @@ package Controllers;
 
 import Commons.*;
 import Models.Customer;
+import Models.Villa;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,7 +12,7 @@ import java.util.Scanner;
 public class CustomerManagement implements CRUDService<Customer> {
     FuncWritingReading funcWritingReading = new FuncWritingReading();
     Scanner scanner = new Scanner(System.in);
-    Standardized standardized =new Standardized();
+    Standardized standardized = new Standardized();
     Validation validation = new Validation();
 
     @Override
@@ -38,7 +39,19 @@ public class CustomerManagement implements CRUDService<Customer> {
 
     @Override
     public void searchById() {
-
+        List<Customer> customerList = read();
+        do {
+            System.out.println("Enter the Customer Id Card");
+            String customerIdCard = scanner.nextLine();
+            for (Customer customer : customerList) {
+                if (customerIdCard.equals(customer.getCustomerIdCard())) {
+                    System.out.println("The customer information of " + customerIdCard + " want to search is: ");
+                    System.out.println(customer.showInfo());
+                    return;
+                }
+            }
+            System.out.println("The Id Card of Customer not available");
+        } while (true);
     }
 
     @Override
@@ -76,13 +89,58 @@ public class CustomerManagement implements CRUDService<Customer> {
     }
 
     @Override
-    public void update(Customer customer, String id) {
-
+    public void update() throws NameException, BirthdayException, GenderException, IdCardException, EmailException {
+        List<Customer> customerList = read();
+        do {
+            System.out.println("Enter Customer Id Card");
+            String customerIdCard = scanner.nextLine();
+            for (int i = 0; i < customerList.size(); i++) {
+                if (customerIdCard.equals(customerList.get(i).getCustomerIdCard())) {
+                    System.out.println("Please update the customer information of customer's " + customerIdCard + " with new information");
+                    List<String> listProperties = new ArrayList<>();
+                    String customerName = inputCustomerName();
+                    listProperties.add(customerName);
+                    String customerBirthDay = inputCustomerBirthday();
+                    listProperties.add(customerBirthDay);
+                    String customerGender = inputCustomerGender();
+                    listProperties.add(customerGender);
+                    listProperties.add(customerIdCard);
+                    String customerPhone = inputCustomerPhone();
+                    listProperties.add(customerPhone);
+                    String customerEmail = inputCustomerEmail();
+                    listProperties.add(customerEmail);
+                    String customerType = inputCustomerType();
+                    listProperties.add(customerType);
+                    String customerAddress = inputCustomerAddress();
+                    listProperties.add(customerAddress);
+                    String[] customerInfo = listProperties.toArray(new String[0]);
+                    Customer customer = new Customer(customerInfo);
+                    customerList.set(i, customer);
+                    funcWritingReading.writeToFile("Customer.csv", customerList, false);
+                    System.out.println("Have been updated");
+                    return;
+                }
+            }
+            System.out.println("The Id Card of customer is not available");
+        } while (true);
     }
 
     @Override
-    public void delete(String id) {
-
+    public void delete() {
+        List<Customer> customerList = read();
+        do {
+            System.out.println("Enter Customer Id Card");
+            String customerIdCard = scanner.nextLine();
+            for (int i = 0; i < customerList.size(); i++) {
+                if (customerIdCard.equals(customerList.get(i).getCustomerIdCard())) {
+                    customerList.remove(i);
+                    funcWritingReading.writeToFile("Customer.csv", customerList, false);
+                    System.out.println("Have been deleted");
+                    return;
+                }
+            }
+            System.out.println("The Customer Id Card is not available");
+        } while (true);
     }
 
     public Customer choiceCustomer() {
@@ -183,9 +241,9 @@ public class CustomerManagement implements CRUDService<Customer> {
     public String inputCustomerName() throws NameException {
         do {
             System.out.println("Enter customer name");
-            String text = scanner.nextLine().trim();
-            if (validation.nameException(text)) {
-                return text;
+            String name = scanner.nextLine().trim();
+            if (validation.nameException(name)) {
+                return name;
             }
         } while (true);
     }
