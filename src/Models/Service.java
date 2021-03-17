@@ -71,11 +71,11 @@ public abstract class Service implements Comparable<Service> {
 
     @Override
     public String toString() {
-        return serviceId + "," +
-                serviceName + "," +
-                usingArea + "," +
-                rentalPrice + "," +
-                maxOfCustomer + "," +
+        return serviceId + COMMA +
+                serviceName + COMMA +
+                usingArea + COMMA +
+                rentalPrice + COMMA +
+                maxOfCustomer + COMMA +
                 rentalType;
     }
 
