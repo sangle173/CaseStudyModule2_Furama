@@ -1,5 +1,6 @@
 package Controllers;
 
+import Commons.*;
 import Models.Customer;
 import Models.House;
 import Models.Room;
@@ -21,12 +22,12 @@ public class MainController {
     EmployeesCVManager employeesCVManager = new EmployeesCVManager();
     Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NameException, EmailException, GenderException, IdCardException, BirthdayException {
         MainController mainController = new MainController();
         mainController.displayMain();
     }
 
-    public void displayMain() {
+    public void displayMain() throws NameException, EmailException, GenderException, IdCardException, BirthdayException {
         System.out.println("Furama resort booking Menu:\n" +
                 "1.Add New Services\n" +
                 "2.Show Services\n" +
@@ -87,7 +88,7 @@ public class MainController {
         }
     }
 
-    public void addNewServicesMenu() {
+    public void addNewServicesMenu() throws NameException, EmailException, GenderException, IdCardException, BirthdayException {
         System.out.println("Menu Add New Services\n" +
                 "1.Add New Villa\n" +
                 "2.Add New House\n" +
@@ -128,7 +129,7 @@ public class MainController {
         }
     }
 
-    public void showServiceMenu() {
+    public void showServiceMenu() throws NameException, EmailException, GenderException, IdCardException, BirthdayException {
         System.out.println("Menu:\n" +
                 "1.Show all Villa\n" +
                 "2.Show all House\n" +
@@ -181,7 +182,7 @@ public class MainController {
         }
     }
 
-    public void addBookingMenu() {
+    public void addBookingMenu() throws NameException, EmailException, GenderException, IdCardException, BirthdayException {
         System.out.println("Booking menu");
         System.out.println("Please choice the customer with Customer Id in list blow");
         Customer customer = customerManagement.choiceCustomer();

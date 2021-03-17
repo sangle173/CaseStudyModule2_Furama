@@ -97,22 +97,19 @@ public class VillaManagement implements CRUDService<Villa> {
         }
         show();
         int index = 0;
-        do {
-            System.out.println("Choice a villa");
-            while (true) {
-                try {
-                    index = Integer.parseInt(scanner.nextLine());
-                    break;
-                } catch (NumberFormatException e) {
-                    System.err.println("Please enter a integer number");
+        while (true) {
+            System.out.println("Choice a customer");
+            try {
+                index = Integer.parseInt(scanner.nextLine());
+                if (index > 0 && index <= villaList.size()) {
+                    return villaList.get(index - 1);
+                } else {
+                    System.out.println("You must to choice in list");
                 }
+            } catch (NumberFormatException e) {
+                System.err.println("Please enter a integer number");
             }
-            if (index < 0 && index > villaList.size()) {
-                System.err.println("You must to choice in list");
-            } else {
-                return villaList.get(index - 1);
-            }
-        } while (true);
+        }
     }
 
 

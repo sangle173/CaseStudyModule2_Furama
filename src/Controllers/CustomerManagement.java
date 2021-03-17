@@ -1,8 +1,6 @@
 package Controllers;
 
-import Commons.FuncWritingReading;
-import Commons.Standardized;
-import Commons.Validation;
+import Commons.*;
 import Models.Customer;
 
 import java.util.ArrayList;
@@ -44,7 +42,7 @@ public class CustomerManagement implements CRUDService<Customer> {
     }
 
     @Override
-    public List<Customer> create() {
+    public List<Customer> create() throws NameException, EmailException, GenderException, IdCardException, BirthdayException {
         List<String> list = new ArrayList<>();
         String customerName = inputCustomerName();
         list.add(customerName);
@@ -71,7 +69,7 @@ public class CustomerManagement implements CRUDService<Customer> {
 
 
     @Override
-    public void add() {
+    public void add() throws NameException, EmailException, GenderException, IdCardException, BirthdayException {
         List<Customer> customerList = create();
         Collections.sort(customerList);
         funcWritingReading.writeToFile("Customer.csv", customerList, true);
@@ -131,7 +129,7 @@ public class CustomerManagement implements CRUDService<Customer> {
         } while (true);
     }
 
-    public String inputCustomerEmail() {
+    public String inputCustomerEmail() throws EmailException {
         do {
             System.out.println("Enter customer email");
             String customerEmail = scanner.nextLine().trim();
@@ -151,7 +149,7 @@ public class CustomerManagement implements CRUDService<Customer> {
         } while (true);
     }
 
-    public String inputCustomerIdCard() {
+    public String inputCustomerIdCard() throws IdCardException {
         do {
             System.out.println("Enter customer id card");
             String customerIdCard = scanner.nextLine().trim();
@@ -161,7 +159,7 @@ public class CustomerManagement implements CRUDService<Customer> {
         } while (true);
     }
 
-    public String inputCustomerGender() {
+    public String inputCustomerGender() throws GenderException {
         do {
             System.out.println("Enter customer gender");
             String customerGender = scanner.nextLine().trim();
@@ -171,7 +169,7 @@ public class CustomerManagement implements CRUDService<Customer> {
         } while (true);
     }
 
-    public String inputCustomerBirthday() {
+    public String inputCustomerBirthday() throws BirthdayException {
         do {
             System.out.println("Enter customer birthday");
             String customerBirthDay = scanner.nextLine().trim();
@@ -182,11 +180,11 @@ public class CustomerManagement implements CRUDService<Customer> {
 
     }
 
-    public String inputCustomerName() {
+    public String inputCustomerName() throws NameException {
         do {
             System.out.println("Enter customer name");
             String text = scanner.nextLine().trim();
-            if (validation.validateText(text)) {
+            if (validation.nameException(text)) {
                 return text;
             }
         } while (true);

@@ -21,8 +21,9 @@ public class Validation {
     private static final String GENDER_REGEX = "^(male|female|unknown)$";
     private static final String ID_CARD_REGEX = "^[0-9]{3}[0-9]{3}[0-9]{3}$";
     private static final String PHONE_REGEX = "^0{1}[0-9]{9}$";
-    private static final String EMAIL_REGEX = "^[a-z][a-z0-9_\\.]{5,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,4}){1,2}$";
-
+    //    private static final String EMAIL_REGEX = "^[a-z][a-z0-9_\\.]{5,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,4}){1,2}$";
+    private static final String EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     public boolean validateIdVilla(String id) {
         try {
@@ -164,71 +165,83 @@ public class Validation {
         }
     }
 
-    public boolean validateCustomerBirthday(String date) {
+    public boolean nameException(String name) throws NameException {
+        try {
+            if (Pattern.matches(TEXT_REGEX, name)) {
+                return true;
+            }
+            throw new NameException(" the text must be capitalized first letter of each word", "CustomerManagement");
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean validateCustomerBirthday(String date) throws BirthdayException {
         Pattern pattern = Pattern.compile(BIRTHDAY_REGEX);
         Matcher matcher = pattern.matcher(date);
-        if (matcher.matches()) {
-            matcher.reset();
-            if (matcher.find()) {
-                String day = matcher.group(1);
-                String month = matcher.group(2);
-                int year = Integer.parseInt(matcher.group(3));
-                if (year < 1900 || year > 2003) {
-                    System.out.println("The year must to from 1900 to 2003");
-                    return false;
-                }
-                if (day.equals("31") && (month.equals("4") || month.equals("6") || month.equals("9") || month.equals("11") || month.equals("04") || month.equals("06") || month.equals("09"))) {
-                    System.out.println("only 1,3,5,7,8,10,12 has 31 days");
-                    return false;
-                } else if (month.equals("2") || month.equals("02")) {
-                    //leap year
-                    if (year % 4 == 0) {
+        try {
+            if (matcher.matches()) {
+                matcher.reset();
+                if (matcher.find()) {
+                    String day = matcher.group(1);
+                    String month = matcher.group(2);
+                    int year = Integer.parseInt(matcher.group(3));
+                    if (year < 1900 || year > 2003) {
+                        throw new BirthdayException("The year must to from 1900 to 2003", "CustomerManagement");
+                    }
+                    if (day.equals("31") && (month.equals("4") || month.equals("6") || month.equals("9") || month.equals("11") || month.equals("04") || month.equals("06") || month.equals("09"))) {
+//                    System.out.println("only 1,3,5,7,8,10,12 has 31 days");
+                        throw new BirthdayException("only 1,3,5,7,8,10,12 has 31 days", "CustomerManagement");
+                    } else if (month.equals("2") || month.equals("02")) {
+                        //leap year
+                        if (year % 4 == 0) {
 
-                        if (day.equals("30") || day.equals("31")) {
-                            System.out.println("February just has 29 or 28 day/per month");
-                            return false;
+                            if (day.equals("30") || day.equals("31")) {
+                                throw new BirthdayException("February just has 29 or 28 day/per month", "CustomerManagement");
+                            } else {
+                                return true;
+                            }
+                        } else if (day.equals("29") || day.equals("30") || day.equals("31")) {
+                            throw new BirthdayException("The year " + year + " not a leap year so February just has 28/per month", "CustomerManagement");
                         } else {
                             return true;
                         }
-                    } else if (day.equals("29") || day.equals("30") || day.equals("31")) {
-                        System.out.println("The year " + year + " not a leap year so February just has 28/per month");
-                        return false;
                     } else {
                         return true;
                     }
                 } else {
-                    return true;
+                    throw new BirthdayException("Birthday must to be same format dd/MM/yyyy", "CustomerManagement");
                 }
             } else {
-                System.out.println("Birthday must to be same format dd/MM/yyyy");
-                return false;
+                throw new BirthdayException("Birthday must to be same format dd/MM/yyyy with dd from 1-31, MM from 1-12, yyyy form 1900- 2003", "CustomerManagement");
             }
-        } else {
-            System.out.println("Birthday must to be same format dd/MM/yyyy with dd from 1-31, MM from 1-12, yyyy form 1900- 2003");
+        } catch (BirthdayException e) {
+            System.err.println(e.getMessage());
             return false;
         }
     }
 
-    public boolean validateCustomerGender(String customerGender) {
+    public boolean validateCustomerGender(String customerGender) throws GenderException {
         try {
             if (Pattern.matches(GENDER_REGEX, customerGender)) {
                 return true;
             }
-            throw new Exception("The gender of customer need to be in list 'male ,female or unknown'");
+            throw new GenderException("The gender of customer need to be in list 'male ,female or unknown'", " CustomerManagement");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
             return false;
         }
     }
 
-    public boolean validateCustomerIdCard(String idCustomer) {
+    public boolean validateCustomerIdCard(String idCustomer) throws IdCardException {
         try {
             if (Pattern.matches(ID_CARD_REGEX, idCustomer)) {
                 return true;
             }
-            throw new Exception("The id card must to be XXXXXXXXX");
+            throw new IdCardException("The id card must to be XXXXXXXXX", " CustomerManagement");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
             return false;
         }
     }
@@ -240,19 +253,19 @@ public class Validation {
             }
             throw new Exception("The phone number must to be 0XXXXXXXXX");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
             return false;
         }
     }
 
-    public boolean validateCustomerEmail(String customerEmail) {
+    public boolean validateCustomerEmail(String customerEmail) throws EmailException {
         try {
             if (Pattern.matches(EMAIL_REGEX, customerEmail)) {
                 return true;
             }
-            throw new Exception("The email format must to be 'abc@abc.abc'");
+            throw new EmailException("The email format must to be 'abc@abc.abc'", " CustomerManagement");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
             return false;
         }
     }

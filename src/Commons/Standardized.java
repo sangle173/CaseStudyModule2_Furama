@@ -14,11 +14,4 @@ public class Standardized {
         }
         return string;
     }
-
-    public static void main(String[] args) {
-        String str = "    nguyen     van     quan   7826    ";
-        Standardized standardized = new Standardized();
-        str = standardized.standardizedDate(str);
-        System.out.println(str);
-    }
 }
