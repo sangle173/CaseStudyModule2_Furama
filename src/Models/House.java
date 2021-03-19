@@ -73,6 +73,7 @@ public class House extends Service {
                 " OtherUtilities= " + getOtherUtilities() + "," +
                 " NoOfFloors= " + getNoOfFloors() + "}";
     }
+
     @Override
     public int compareTo(Service o) {
         return this.getServiceName().compareTo(o.getServiceName());

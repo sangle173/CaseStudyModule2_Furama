@@ -34,6 +34,7 @@ public class RoomManagement implements CRUDService<Room> {
             count++;
         }
     }
+
     public void showNotDuplicate() {
         List<String[]> list = funcWritingReading.readFromFile("Room.csv");
         Set<Room> roomTreeSet = new TreeSet<>();
@@ -114,10 +115,10 @@ public class RoomManagement implements CRUDService<Room> {
         List<Room> roomList = read();
         do {
             System.out.println("Enter Room id");
-            String roomId=scanner.nextLine();
-            for (int i = 0; i <roomList.size() ; i++) {
-                if (roomId.equals(roomList.get(i).getServiceId())){
-                    System.out.println("Please update the room "+roomId+" with new information");
+            String roomId = scanner.nextLine();
+            for (int i = 0; i < roomList.size(); i++) {
+                if (roomId.equals(roomList.get(i).getServiceId())) {
+                    System.out.println("Please update the room " + roomId + " with new information");
                     String serviceId = roomId;
                     List<String> listPropeties = serviceManagement.addProperties();
                     listPropeties.add(0, serviceId);
@@ -125,14 +126,14 @@ public class RoomManagement implements CRUDService<Room> {
                     listPropeties.add(freeService);
                     String[] roomInfo = listPropeties.toArray(new String[0]);
                     Room room = new Room(roomInfo);
-                    roomList.set(i,room);
-                    funcWritingReading.writeToFile("Room.csv",roomList,false);
+                    roomList.set(i, room);
+                    funcWritingReading.writeToFile("Room.csv", roomList, false);
                     System.out.println("Have been updated");
                     return;
                 }
             }
             System.out.println("The Room Id not available");
-        }while (true);
+        } while (true);
     }
 
     @Override
@@ -140,17 +141,17 @@ public class RoomManagement implements CRUDService<Room> {
         List<Room> roomList = read();
         do {
             System.out.println("Enter Room id");
-            String roomId=scanner.nextLine();
-            for (int i = 0; i <roomList.size() ; i++) {
-                if (roomId.equals(roomList.get(i).getServiceId())){
+            String roomId = scanner.nextLine();
+            for (int i = 0; i < roomList.size(); i++) {
+                if (roomId.equals(roomList.get(i).getServiceId())) {
                     roomList.remove(i);
-                    funcWritingReading.writeToFile("Room.csv",roomList,false);
+                    funcWritingReading.writeToFile("Room.csv", roomList, false);
                     System.out.println("Have been deleted");
                     return;
                 }
             }
             System.out.println("The Room Id not available");
-        }while (true);
+        } while (true);
     }
 
     public String inputServiceId() {

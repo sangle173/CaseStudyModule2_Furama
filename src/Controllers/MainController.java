@@ -96,7 +96,6 @@ public class MainController {
     }
 
 
-
     public void addNewServicesMenu() throws NameException, EmailException, GenderException, IdCardException, BirthdayException {
         System.out.println("Menu Add New Services\n" +
                 "1.Add New Villa\n" +
@@ -242,6 +241,7 @@ public class MainController {
             }
         }
     }
+
     public void updateAndDeleteServiceMenu() throws IdCardException, EmailException, GenderException, BirthdayException, NameException {
         System.out.println("Menu:\n" +
                 "1.Update Villa\n" +
@@ -302,6 +302,7 @@ public class MainController {
             updateAndDeleteServiceMenu();
         }
     }
+
     public void searchCustomerByIdMenu() throws IdCardException, EmailException, GenderException, BirthdayException, NameException {
         System.out.println("Menu:\n" +
                 "1.Search Villa\n" +

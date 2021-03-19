@@ -13,7 +13,7 @@ public class CinemaBookingManager {
         int noOfTicket = 5;
         while (true) {
             if (noOfTicket > 0) {
-                System.out.println("Welcome to Furama 4D cinema booking. We have "+noOfTicket+" ticket");
+                System.out.println("Welcome to Furama 4D cinema booking. We have " + noOfTicket + " ticket");
                 Customer customer = customerManagement.choiceCustomer();
                 customerQueue.offer(customer);
                 System.out.println("Thank you so much for booking");

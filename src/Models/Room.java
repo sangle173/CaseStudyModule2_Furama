@@ -45,6 +45,7 @@ public class Room extends Service {
                 " RentalType= " + super.getRentalType() + "," +
                 " FreeService= " + getFreeService() + "}";
     }
+
     @Override
     public int compareTo(Service o) {
         return this.getServiceName().compareTo(o.getServiceName());

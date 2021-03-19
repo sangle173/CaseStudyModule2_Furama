@@ -4,7 +4,7 @@ public class Standardized {
     public String standardizedDate(String string) {
         string = string.trim();
         string = string.replaceAll("\\s+", " ");
-        String temp[] = string.split(" ");
+        String[] temp = string.split(" ");
         string = "";
         for (int i = 0; i < temp.length; i++) {
             string += String.valueOf(temp[i].charAt(0)).toUpperCase() + temp[i].substring(1);

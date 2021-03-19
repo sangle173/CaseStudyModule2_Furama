@@ -1,7 +1,7 @@
 package Commons;
 
 public class EmailException extends Exception {
-    private String className;
+    private final String className;
 
     public EmailException(String string, String className) {
         super(string);
