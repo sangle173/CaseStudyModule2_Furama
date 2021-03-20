@@ -12,8 +12,6 @@ public interface CRUDService<E> {
 
     void searchById();
 
-    List<E> create() throws NameException, EmailException, GenderException, IdCardException, BirthdayException;
-
     void add() throws NameException, EmailException, GenderException, IdCardException, BirthdayException;
 
     void update() throws NameException, BirthdayException, GenderException, IdCardException, EmailException;

@@ -2,6 +2,7 @@ package Controllers;
 
 import Commons.*;
 import Models.Customer;
+import Models.Room;
 import Models.Villa;
 
 import java.util.ArrayList;
@@ -55,37 +56,44 @@ public class CustomerManagement implements CRUDService<Customer> {
     }
 
     @Override
-    public List<Customer> create() throws NameException, EmailException, GenderException, IdCardException, BirthdayException {
-        List<String> list = new ArrayList<>();
-        String customerName = inputCustomerName();
-        list.add(customerName);
-        String customerBirthDay = inputCustomerBirthday();
-        list.add(customerBirthDay);
-        String customerGender = inputCustomerGender();
-        list.add(customerGender);
-        String customerIdCard = inputCustomerIdCard();
-        list.add(customerIdCard);
-        String customerPhone = inputCustomerPhone();
-        list.add(customerPhone);
-        String customerEmail = inputCustomerEmail();
-        list.add(customerEmail);
-        String customerType = inputCustomerType();
-        list.add(customerType);
-        String customerAddress = inputCustomerAddress();
-        list.add(customerAddress);
-        String[] customerInfo = list.toArray(new String[0]);
-        List<Customer> customerList = new ArrayList<>();
-        Customer customer = new Customer(customerInfo);
-        customerList.add(customer);
-        return customerList;
-    }
-
-
-    @Override
     public void add() throws NameException, EmailException, GenderException, IdCardException, BirthdayException {
-        List<Customer> customerList = create();
-        Collections.sort(customerList);
-        funcWritingReading.writeToFile("Customer.csv", customerList, true);
+        List<Customer> customerList;
+        boolean exit = false;
+        List<String> list = new ArrayList<>();
+        do {
+            customerList=new ArrayList<>();
+            String customerName = inputCustomerName();
+            list.add(customerName);
+            String customerBirthDay = inputCustomerBirthday();
+            list.add(customerBirthDay);
+            String customerGender = inputCustomerGender();
+            list.add(customerGender);
+            String customerIdCard = inputCustomerIdCard();
+            list.add(customerIdCard);
+            String customerPhone = inputCustomerPhone();
+            list.add(customerPhone);
+            String customerEmail = inputCustomerEmail();
+            list.add(customerEmail);
+            String customerType = inputCustomerType();
+            list.add(customerType);
+            String customerAddress = inputCustomerAddress();
+            list.add(customerAddress);
+            String[] customerInfo = list.toArray(new String[0]);
+            Customer customer = new Customer(customerInfo);
+            customerList.add(customer);
+            Collections.sort(customerList);
+            funcWritingReading.writeToFile("Customer.csv", customerList, true);
+            System.out.println("Do you want to continue (Y/N)? User chooses Y to continues, if you chooses N, the program returns main screen\n" +
+                    "and saved the all room to systems.");
+            String choice = scanner.nextLine();
+            if ("N".equals(choice)) {
+                System.out.println("Loading 0% 10% 20% 30% 40%...........80% 90% 100%, done!");
+                System.out.println("Villa have been add to systems");
+                exit = true;
+            } else if ("Y".equals(choice)) {
+                exit = false;
+            }
+        } while (!exit);
     }
 
     @Override

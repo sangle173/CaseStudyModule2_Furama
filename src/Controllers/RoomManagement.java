@@ -29,8 +29,9 @@ public class RoomManagement implements CRUDService<Room> {
     public void show() {
         List<Room> roomList = read();
         int count = 1;
+        System.out.println("|OrderNo|**|ServiceID|**|ServiceName|**|UseArea|**|RentalPrice|**|MaxCustomer|**|RentalType|**|FreeService|");
         for (Room room : roomList) {
-            System.out.println(count + ".\t" + room.showInfo());
+            System.out.println("\t" + count + "\t\t" + room.showInfo());
             count++;
         }
     }
@@ -66,24 +67,33 @@ public class RoomManagement implements CRUDService<Room> {
         } while (true);
     }
 
-    @Override
-    public List<Room> create() {
-        String serviceId = inputServiceId();
-        List<String> list = serviceManagement.addProperties();
-        list.add(0, serviceId);
-        String freeService = serviceManagement.inputFreeService();
-        list.add(freeService);
-        String[] roomInfo = list.toArray(new String[0]);
-        List<Room> roomList = new ArrayList<>();
-        Room room = new Room(roomInfo);
-        roomList.add(room);
-        return roomList;
-    }
 
     @Override
     public void add() {
-        List<Room> roomList = create();
-        funcWritingReading.writeToFile("Room.csv", roomList, true);
+        List<Room> roomList;
+        boolean exit = false;
+        do {
+            roomList = new ArrayList<>();
+            String serviceId = inputServiceId();
+            List<String> list = serviceManagement.addProperties();
+            list.add(0, serviceId);
+            String freeService = serviceManagement.inputFreeService();
+            list.add(freeService);
+            String[] roomInfo = list.toArray(new String[0]);
+            Room room = new Room(roomInfo);
+            roomList.add(room);
+            funcWritingReading.writeToFile("Room.csv", roomList, true);
+            System.out.println("Do you want to continue (Y/N)? User chooses Y to continues, if you chooses N, the program returns main screen\n" +
+                    "and saved the all room to systems.");
+            String choice = scanner.nextLine();
+            if ("N".equals(choice)) {
+                System.out.println("Loading 0% 10% 20% 30% 40%...........80% 90% 100%, done!");
+                System.out.println("Villa have been add to systems");
+                exit = true;
+            } else if ("Y".equals(choice)) {
+                exit = false;
+            }
+        } while (!exit);
     }
 
     public Room choiceRoom() {

@@ -66,29 +66,37 @@ public class VillaManagement implements CRUDService<Villa> {
     }
 
     @Override
-    public List<Villa> create() {
-        String serviceId = inputServiceId();
-        List<String> list = serviceManagement.addProperties();
-        list.add(0, serviceId);
-        String roomStandard = serviceManagement.inputRoomStandard();
-        list.add(roomStandard);
-        String otherUtilities = serviceManagement.inputOtherUtilities();
-        list.add(otherUtilities);
-        String areaOfPool = serviceManagement.inputAreaOfPool();
-        list.add(areaOfPool);
-        String noOfFloors = serviceManagement.inputNoOfFloors();
-        list.add(noOfFloors);
-        String[] villaInfo = list.toArray(new String[0]);
-        List<Villa> villaList = new ArrayList<>();
-        Villa villa = new Villa(villaInfo);
-        villaList.add(villa);
-        return villaList;
-    }
-
-    @Override
     public void add() {
-        List<Villa> villaList = create();
-        funcWritingReading.writeToFile("Villa.csv", villaList, true);
+        List<Villa> villaList;
+        boolean exit = false;
+        do {
+            villaList = new ArrayList<>();
+            String serviceId = inputServiceId();
+            List<String> list = serviceManagement.addProperties();
+            list.add(0, serviceId);
+            String roomStandard = serviceManagement.inputRoomStandard();
+            list.add(roomStandard);
+            String otherUtilities = serviceManagement.inputOtherUtilities();
+            list.add(otherUtilities);
+            String areaOfPool = serviceManagement.inputAreaOfPool();
+            list.add(areaOfPool);
+            String noOfFloors = serviceManagement.inputNoOfFloors();
+            list.add(noOfFloors);
+            String[] villaInfo = list.toArray(new String[0]);
+            Villa villa = new Villa(villaInfo);
+            villaList.add(villa);
+            funcWritingReading.writeToFile("Villa.csv", villaList, true);
+            System.out.println("Do you want to continue (Y/N)? User chooses Y to continues, if you chooses N, the program returns main screen\n" +
+                    "and saved the all villa to systems.");
+            String choice = scanner.nextLine();
+            if ("N".equals(choice)) {
+                System.out.println("Loading 0% 10% 20% 30% 40%...........80% 90% 100%, done!");
+                System.out.println("Villa have been add to systems");
+                exit = true;
+            } else if ("Y".equals(choice)) {
+                exit = false;
+            }
+        } while (!exit);
     }
 
     public Villa choiceVilla() {

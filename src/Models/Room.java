@@ -37,13 +37,13 @@ public class Room extends Service {
 
     @Override
     public String showInfo() {
-        return "Room{ServiceId= " + super.getServiceId() + "," +
-                " ServiceName= " + super.getServiceName() + "," +
-                " UsingArea= " + super.getUsingArea() + "m2," +
-                " RentalPrice= " + super.getRentalPrice() + "$," +
-                " MaxOfCustomer= " + super.getMaxOfCustomer() + " people," +
-                " RentalType= " + super.getRentalType() + "," +
-                " FreeService= " + getFreeService() + "}";
+        return super.getServiceId() + "\t\t" +
+                super.getServiceName() + "\t\t" +
+                super.getUsingArea() + "m2\t\t" +
+                super.getRentalPrice() + "$\t\t\t" +
+                super.getMaxOfCustomer() + "people\t\t\t" +
+                super.getRentalType() + "\t\t\t" +
+                getFreeService();
     }
 
     @Override

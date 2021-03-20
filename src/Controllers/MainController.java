@@ -28,7 +28,8 @@ public class MainController {
     }
 
     public void displayMain() throws NameException, EmailException, GenderException, IdCardException, BirthdayException {
-        System.out.println("Furama resort booking Menu:\n" +
+        System.out.println("************************************");
+        System.out.println("FURAMA RESORT BOOKING:\n" +
                 "1.Add New Services\n" +
                 "2.Show Services\n" +
                 "3.Add New Customer\n" +
@@ -41,8 +42,8 @@ public class MainController {
                 "10.Update And Delete Service\n" +
                 "11.Search Customer by Id Card\n" +
                 "0.Exit");
-        System.out.println("-----------------");
-        System.out.println("Please choose: ");
+        System.out.println("************************************");
+        System.out.print("Please choose: ");
         String choose = null;
         boolean exit = false;
 
@@ -97,13 +98,15 @@ public class MainController {
 
 
     public void addNewServicesMenu() throws NameException, EmailException, GenderException, IdCardException, BirthdayException {
-        System.out.println("Menu Add New Services\n" +
+        System.out.println("************************************");
+        System.out.println("ADD SERVICE MENU\n" +
                 "1.Add New Villa\n" +
                 "2.Add New House\n" +
                 "3.Add New Room\n" +
                 "4.Back To Menu\n" +
                 "0.Exit");
-        System.out.println("Please choose: ");
+        System.out.println("************************************");
+        System.out.print("Please choose: ");
         String choose = null;
         boolean exit = false;
 
@@ -138,7 +141,8 @@ public class MainController {
     }
 
     public void showServiceMenu() throws NameException, EmailException, GenderException, IdCardException, BirthdayException {
-        System.out.println("Menu:\n" +
+        System.out.println("************************************");
+        System.out.println("SHOW SERVICE MENU:\n" +
                 "1.Show all Villa\n" +
                 "2.Show all House\n" +
                 "3.Show all Room\n" +
@@ -147,7 +151,8 @@ public class MainController {
                 "6.Show all Name Room Not Duplicate\n" +
                 "7.Back to Menu\n" +
                 "0.Exit");
-        System.out.println("Please choose: ");
+        System.out.println("************************************");
+        System.out.print("Please choose: ");
         String choose = null;
         boolean exit = false;
 
@@ -191,16 +196,19 @@ public class MainController {
     }
 
     public void addBookingMenu() throws NameException, EmailException, GenderException, IdCardException, BirthdayException {
+        System.out.println("************************************");
         System.out.println("Booking menu");
         System.out.println("Please choice the customer with Customer Id in list blow");
         Customer customer = customerManagement.choiceCustomer();
         System.out.println("Choice a service you want to booking");
+        System.out.println("************************************");
         System.out.println("1.Book Villa\n" +
                 "2.Book House\n" +
                 "3.Book Room\n" +
                 "4.Back To Menu\n" +
                 "0.Exit");
-        System.out.println("Enter your choice: ");
+        System.out.println("************************************");
+        System.out.print("Enter your choice: ");
         String choose = null;
         boolean exit = false;
 
@@ -243,7 +251,8 @@ public class MainController {
     }
 
     public void updateAndDeleteServiceMenu() throws IdCardException, EmailException, GenderException, BirthdayException, NameException {
-        System.out.println("Menu:\n" +
+        System.out.println("************************************");
+        System.out.println("EDIT MENU:\n" +
                 "1.Update Villa\n" +
                 "2.Update House\n" +
                 "3.Update Room\n" +
@@ -254,7 +263,8 @@ public class MainController {
                 "8.Delete Customer\n" +
                 "9.Back to Menu\n" +
                 "0.Exit");
-        System.out.println("Please choose: ");
+        System.out.println("************************************");
+        System.out.print("Please choose: ");
         String choose = null;
         boolean exit = false;
 
@@ -304,14 +314,16 @@ public class MainController {
     }
 
     public void searchCustomerByIdMenu() throws IdCardException, EmailException, GenderException, BirthdayException, NameException {
-        System.out.println("Menu:\n" +
+        System.out.println("************************************");
+        System.out.println("SEARCHING MENU:\n" +
                 "1.Search Villa\n" +
                 "2.Search House\n" +
                 "3.Search Room\n" +
                 "4.Search Customer\n" +
                 "5.Back to Menu\n" +
                 "0.Exit");
-        System.out.println("Please choose: ");
+        System.out.println("************************************");
+        System.out.print("Please choose: ");
         String choose = null;
         boolean exit = false;
 

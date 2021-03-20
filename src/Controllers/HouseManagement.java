@@ -65,29 +65,36 @@ public class HouseManagement implements CRUDService<House> {
         } while (true);
     }
 
-
-    @Override
-    public List<House> create() {
-        String serviceId = inputServiceId();
-        List<String> list = serviceManagement.addProperties();
-        list.add(0, serviceId);
-        String roomStandard = serviceManagement.inputRoomStandard();
-        list.add(roomStandard);
-        String otherUtilities = serviceManagement.inputOtherUtilities();
-        list.add(otherUtilities);
-        String noOfFloors = serviceManagement.inputNoOfFloors();
-        list.add(noOfFloors);
-        String[] houseInfo = list.toArray(new String[0]);
-        List<House> houseList = new ArrayList<>();
-        House house = new House(houseInfo);
-        houseList.add(house);
-        return houseList;
-    }
-
     @Override
     public void add() {
-        List<House> houseList = create();
-        funcWritingReading.writeToFile("House.csv", houseList, true);
+        List<House> houseList;
+        boolean exit = false;
+        do {
+            houseList = new ArrayList<>();
+            String serviceId = inputServiceId();
+            List<String> list = serviceManagement.addProperties();
+            list.add(0, serviceId);
+            String roomStandard = serviceManagement.inputRoomStandard();
+            list.add(roomStandard);
+            String otherUtilities = serviceManagement.inputOtherUtilities();
+            list.add(otherUtilities);
+            String noOfFloors = serviceManagement.inputNoOfFloors();
+            list.add(noOfFloors);
+            String[] houseInfo = list.toArray(new String[0]);
+            House house = new House(houseInfo);
+            houseList.add(house);
+            funcWritingReading.writeToFile("House.csv", houseList, true);
+            System.out.println("Do you want to continue (Y/N)? User chooses Y to continues, if you chooses N, the program returns main screen\n" +
+                    "and saved the all house to systems.");
+            String choice = scanner.nextLine();
+            if ("N".equals(choice)) {
+                System.out.println("Loading 0% 10% 20% 30% 40%...........80% 90% 100%, done!");
+                System.out.println("Villa have been add to systems");
+                exit = true;
+            } else if ("Y".equals(choice)) {
+                exit = false;
+            }
+        } while (!exit);
     }
 
     public House choicehouse() {
