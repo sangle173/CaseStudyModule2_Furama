@@ -61,7 +61,7 @@ public class CustomerManagement implements CRUDService<Customer> {
         boolean exit = false;
         List<String> list = new ArrayList<>();
         do {
-            customerList=new ArrayList<>();
+            customerList = new ArrayList<>();
             String customerName = inputCustomerName();
             list.add(customerName);
             String customerBirthDay = inputCustomerBirthday();

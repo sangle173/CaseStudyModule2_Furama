@@ -87,10 +87,10 @@ public class VillaManagement implements CRUDService<Villa> {
             villaList.add(villa);
             funcWritingReading.writeToFile("Villa.csv", villaList, true);
             System.out.println("Do you want to continue (Y/N)? User chooses Y to continues, if you chooses N, the program returns main screen\n" +
-                    "and saved the all villa to systems.");
+                    "and saved the all value to systems.");
             String choice = scanner.nextLine();
             if ("N".equals(choice)) {
-                System.out.println("Loading 0% 10% 20% 30% 40%...........80% 90% 100%, done!");
+                System.out.println("Exporting 10%..20%..30%..40%..50%..60%..70%..80%..90%..Done!");
                 System.out.println("Villa have been add to systems");
                 exit = true;
             } else if ("Y".equals(choice)) {
