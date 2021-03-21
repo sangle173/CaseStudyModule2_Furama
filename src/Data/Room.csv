@@ -1,5 +1,6 @@
 SVRO-1111,Room B,60.0,500.0,2,Day,massage
-SVRO-1112,Room A,40.0,900.0,4,day,karaoke
-SVRO-1113,Room A,40.0,1000.0,4,day,car
-SVRO-1114,Room A,40.0,200.0,4,day,drink
-SVRO-1115,Room A,40.0,400.0,4,day,food
+SVRO-1112,Room A,40.0,900.0,4,Day,karaoke
+SVRO-1113,Room A,40.0,1000.0,4,Day,car
+SVRO-1114,Room A,40.0,200.0,4,Day,drink
+SVRO-1115,Room A,40.0,400.0,4,D,food
+SVRO-0001,Room A,50.0,200.0,4,Day,massage

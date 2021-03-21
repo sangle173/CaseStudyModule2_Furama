@@ -1,10 +1,7 @@
 package Controllers;
 
 import Commons.*;
-import Models.Customer;
-import Models.House;
-import Models.Room;
-import Models.Villa;
+import Models.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -43,57 +40,51 @@ public class MainController {
                 "11.Search Customer by Id Card\n" +
                 "0.Exit");
         System.out.println("************************************");
-        System.out.print("Please choose: ");
-        String choose = null;
-        boolean exit = false;
-
-        while (true) {
-            choose = scanner.nextLine();
-            switch (choose) {
-                case "1":
+        int choice;
+        do {
+            choice = getChoice();
+            switch (choice) {
+                case 1:
                     addNewServicesMenu();
                     break;
-                case "2":
+                case 2:
                     showServiceMenu();
                     break;
-                case "3":
+                case 3:
                     customerManagement.add();
                     break;
-                case "4":
+                case 4:
                     customerManagement.show();
                     break;
-                case "5":
+                case 5:
                     addBookingMenu();
-                case "6":
+                case 6:
                     bookingManagement.show();
                     break;
-                case "7":
+                case 7:
                     employeeManagement.show();
                     break;
-                case "8":
+                case 8:
                     cinemaBookingManager.saleTicket();
                     break;
-                case "9":
+                case 9:
                     employeesCVManager.searchEmployee();
                     break;
-                case "10":
+                case 10:
                     updateAndDeleteServiceMenu();
                     break;
-                case "11":
+                case 11:
                     searchCustomerByIdMenu();
                     break;
-                case "0":
+                case 0:
                     System.out.println("See you again!");
-                    exit = true;
+                    System.exit(0);
                     break;
                 default:
                     System.err.println("Invalid! please choose action in below menu:");
             }
-            if (exit) {
-                break;
-            }
             displayMain();
-        }
+        } while (true);
     }
 
 
@@ -106,38 +97,32 @@ public class MainController {
                 "4.Back To Menu\n" +
                 "0.Exit");
         System.out.println("************************************");
-        System.out.print("Please choose: ");
-        String choose = null;
-        boolean exit = false;
-
-        while (true) {
-            choose = scanner.nextLine();
-            switch (choose) {
-                case "1":
+        int choice;
+        do {
+            choice = getChoice();
+            switch (choice) {
+                case 1:
                     villaManagement.add();
                     break;
-                case "2":
+                case 2:
                     houseManagement.add();
                     break;
-                case "3":
+                case 3:
                     roomManagement.add();
                     break;
-                case "4":
+                case 4:
                     displayMain();
                     break;
-                case "0":
+                case 0:
                     System.out.println("See you again!");
-                    exit = true;
+                    System.exit(0);
                     break;
                 default:
                     System.err.println("Invalid! please choose action in below menu:");
                     break;
             }
-            if (exit) {
-                break;
-            }
             addNewServicesMenu();
-        }
+        } while (true);
     }
 
     public void showServiceMenu() throws NameException, EmailException, GenderException, IdCardException, BirthdayException {
@@ -152,53 +137,48 @@ public class MainController {
                 "7.Back to Menu\n" +
                 "0.Exit");
         System.out.println("************************************");
-        System.out.print("Please choose: ");
-        String choose = null;
-        boolean exit = false;
-
-        while (true) {
-            choose = scanner.nextLine();
-            switch (choose) {
-                case "1":
+        int choice;
+        do {
+            choice = getChoice();
+            switch (choice) {
+                case 1:
                     villaManagement.show();
                     break;
-                case "2":
+                case 2:
                     houseManagement.show();
                     break;
-                case "3":
+                case 3:
                     roomManagement.show();
                     break;
-                case "4":
+                case 4:
                     villaManagement.showNotDuplicate();
                     break;
-                case "5":
+                case 5:
                     houseManagement.showNotDuplicate();
                     break;
-                case "6":
+                case 6:
                     roomManagement.showNotDuplicate();
                     break;
-                case "7":
+                case 7:
                     displayMain();
                     break;
-                case "0":
+                case 0:
                     System.out.println("See you again!");
-                    exit = true;
+                    System.exit(0);
                     break;
                 default:
                     System.err.println("Invalid! please choose action in below menu:");
                     break;
             }
-            if (exit) {
-                break;
-            }
             showServiceMenu();
-        }
+        } while (true);
     }
 
     public void addBookingMenu() throws NameException, EmailException, GenderException, IdCardException, BirthdayException {
         System.out.println("************************************");
         System.out.println("Booking menu");
         System.out.println("Please choice the customer with Customer Id in list blow");
+        List<Booking> bookingList = bookingManagement.read();
         Customer customer = customerManagement.choiceCustomer();
         System.out.println("Choice a service you want to booking");
         System.out.println("************************************");
@@ -208,46 +188,40 @@ public class MainController {
                 "4.Back To Menu\n" +
                 "0.Exit");
         System.out.println("************************************");
-        System.out.print("Enter your choice: ");
-        String choose = null;
-        boolean exit = false;
-
-        while (true) {
-            choose = scanner.nextLine();
-            switch (choose) {
-                case "1":
+        int choice;
+        do {
+            choice = getChoice();
+            switch (choice) {
+                case 1:
                     Villa villa = villaManagement.choiceVilla();
                     bookingManagement.add(customer, villa);
                     System.out.println("Your selection have been saved");
                     displayMain();
                     break;
-                case "2":
+                case 2:
                     House house = houseManagement.choicehouse();
                     bookingManagement.add(customer, house);
                     System.out.println("Your selection have been saved");
                     displayMain();
                     break;
-                case "3":
+                case 3:
                     Room room = roomManagement.choiceRoom();
                     bookingManagement.add(customer, room);
                     System.out.println("Your selection have been saved");
                     displayMain();
                     break;
-                case "4":
+                case 4:
                     displayMain();
                     break;
-                case "0":
+                case 0:
                     System.out.println("See you again!");
-                    exit = true;
+                    System.exit(0);
                     break;
                 default:
                     System.err.println("Invalid! please choose action in below menu:");
                     break;
             }
-            if (exit) {
-                break;
-            }
-        }
+        } while (true);
     }
 
     public void updateAndDeleteServiceMenu() throws IdCardException, EmailException, GenderException, BirthdayException, NameException {
@@ -264,53 +238,47 @@ public class MainController {
                 "9.Back to Menu\n" +
                 "0.Exit");
         System.out.println("************************************");
-        System.out.print("Please choose: ");
-        String choose = null;
-        boolean exit = false;
-
-        while (true) {
-            choose = scanner.nextLine();
-            switch (choose) {
-                case "1":
+        int choice;
+        do {
+            choice = getChoice();
+            switch (choice) {
+                case 1:
                     villaManagement.update();
                     break;
-                case "2":
+                case 2:
                     houseManagement.update();
                     break;
-                case "3":
+                case 3:
                     roomManagement.update();
                     break;
-                case "4":
+                case 4:
                     villaManagement.delete();
                     break;
-                case "5":
+                case 5:
                     houseManagement.delete();
                     break;
-                case "6":
+                case 6:
                     roomManagement.delete();
                     break;
-                case "7":
+                case 7:
                     customerManagement.update();
                     break;
-                case "8":
+                case 8:
                     customerManagement.delete();
                     break;
-                case "9":
+                case 9:
                     displayMain();
                     break;
-                case "0":
+                case 0:
                     System.out.println("See you again!");
-                    exit = true;
+                    System.exit(0);
                     break;
                 default:
                     System.err.println("Invalid! please choose action in below menu:");
                     break;
             }
-            if (exit) {
-                break;
-            }
             updateAndDeleteServiceMenu();
-        }
+        } while (true);
     }
 
     public void searchCustomerByIdMenu() throws IdCardException, EmailException, GenderException, BirthdayException, NameException {
@@ -323,40 +291,50 @@ public class MainController {
                 "5.Back to Menu\n" +
                 "0.Exit");
         System.out.println("************************************");
-        System.out.print("Please choose: ");
-        String choose = null;
-        boolean exit = false;
-
-        while (true) {
-            choose = scanner.nextLine();
-            switch (choose) {
-                case "1":
+        int choice;
+        do {
+            choice = getChoice();
+            switch (choice) {
+                case 1:
                     villaManagement.searchById();
                     break;
-                case "2":
+                case 2:
                     houseManagement.searchById();
                     break;
-                case "3":
+                case 3:
                     roomManagement.searchById();
                     break;
-                case "4":
+                case 4:
                     customerManagement.searchById();
                     break;
-                case "5":
+                case 5:
                     displayMain();
                     break;
-                case "0":
+                case 0:
                     System.out.println("See you again!");
-                    exit = true;
+                    System.exit(0);
                     break;
                 default:
                     System.err.println("Invalid! please choose action in below menu:");
                     break;
             }
-            if (exit) {
-                break;
-            }
             searchCustomerByIdMenu();
+        } while (true);
+    }
+
+    public int getChoice() {
+        int choice = 0;
+        while (true) {
+            try {
+                System.out.print("Please choice: ");
+                choice = Integer.parseInt(scanner.nextLine());
+                if (choice >= 0) {
+                    break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("The choice must to a number");
+            }
         }
+        return choice;
     }
 }

@@ -70,19 +70,17 @@ public class RoomManagement implements CRUDService<Room> {
 
     @Override
     public void add() {
-        List<Room> roomList;
+        List<Room> roomList = new ArrayList<>();
+        List<String> list = serviceManagement.addProperties();
         boolean exit = false;
         do {
-            roomList = new ArrayList<>();
             String serviceId = inputServiceId();
-            List<String> list = serviceManagement.addProperties();
             list.add(0, serviceId);
             String freeService = serviceManagement.inputFreeService();
             list.add(freeService);
             String[] roomInfo = list.toArray(new String[0]);
             Room room = new Room(roomInfo);
             roomList.add(room);
-            funcWritingReading.writeToFile("Room.csv", roomList, true);
             System.out.println("Do you want to continue (Y/N)? User chooses Y to continues, if you chooses N, the program returns main screen\n" +
                     "and saved the all value to systems.");
             String choice = scanner.nextLine();
@@ -94,6 +92,7 @@ public class RoomManagement implements CRUDService<Room> {
                 exit = false;
             }
         } while (!exit);
+        funcWritingReading.writeToFile("Room.csv", roomList, true);
     }
 
     public Room choiceRoom() {

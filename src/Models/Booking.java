@@ -49,6 +49,6 @@ public class Booking {
 
     public String showBooking() {
         return "Customer Information :" + customer.showInfo() + ", Your service " +
-                service.showInfo();
+                service.getServiceId();
     }
 }

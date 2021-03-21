@@ -67,12 +67,11 @@ public class VillaManagement implements CRUDService<Villa> {
 
     @Override
     public void add() {
-        List<Villa> villaList;
+        List<Villa> villaList = new ArrayList<>();
+        List<String> list = serviceManagement.addProperties();
         boolean exit = false;
         do {
-            villaList = new ArrayList<>();
             String serviceId = inputServiceId();
-            List<String> list = serviceManagement.addProperties();
             list.add(0, serviceId);
             String roomStandard = serviceManagement.inputRoomStandard();
             list.add(roomStandard);
@@ -85,7 +84,6 @@ public class VillaManagement implements CRUDService<Villa> {
             String[] villaInfo = list.toArray(new String[0]);
             Villa villa = new Villa(villaInfo);
             villaList.add(villa);
-            funcWritingReading.writeToFile("Villa.csv", villaList, true);
             System.out.println("Do you want to continue (Y/N)? User chooses Y to continues, if you chooses N, the program returns main screen\n" +
                     "and saved the all value to systems.");
             String choice = scanner.nextLine();
@@ -97,6 +95,7 @@ public class VillaManagement implements CRUDService<Villa> {
                 exit = false;
             }
         } while (!exit);
+        funcWritingReading.writeToFile("Villa.csv", villaList, true);
     }
 
     public Villa choiceVilla() {

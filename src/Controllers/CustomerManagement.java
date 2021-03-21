@@ -57,11 +57,10 @@ public class CustomerManagement implements CRUDService<Customer> {
 
     @Override
     public void add() throws NameException, EmailException, GenderException, IdCardException, BirthdayException {
-        List<Customer> customerList;
+        List<Customer> customerList = new ArrayList<>();
         boolean exit = false;
         List<String> list = new ArrayList<>();
         do {
-            customerList = new ArrayList<>();
             String customerName = inputCustomerName();
             list.add(customerName);
             String customerBirthDay = inputCustomerBirthday();
@@ -82,7 +81,6 @@ public class CustomerManagement implements CRUDService<Customer> {
             Customer customer = new Customer(customerInfo);
             customerList.add(customer);
             Collections.sort(customerList);
-            funcWritingReading.writeToFile("Customer.csv", customerList, true);
             System.out.println("Do you want to continue (Y/N)? User chooses Y to continues, if you chooses N, the program returns main screen\n" +
                     "and saved the all room to systems.");
             String choice = scanner.nextLine();
@@ -94,6 +92,7 @@ public class CustomerManagement implements CRUDService<Customer> {
                 exit = false;
             }
         } while (!exit);
+        funcWritingReading.writeToFile("Customer.csv", customerList, true);
     }
 
     @Override
