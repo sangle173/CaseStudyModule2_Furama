@@ -79,7 +79,7 @@ public class HouseManagement implements CRUDService<House> {
             list.add(otherUtilities);
             String noOfFloors = serviceManagement.inputNoOfFloors();
             list.add(noOfFloors);
-            String[] houseInfo = list.toArray(new String[0]);
+            String[] houseInfo = list.toArray(new String[list.size()]);
             House house = new House(houseInfo);
             houseList.add(house);
             System.out.println("Do you want to continue (Y/N)? User chooses Y to continues, if you chooses N, the program returns main screen\n" +

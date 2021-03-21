@@ -120,7 +120,7 @@ public class CustomerManagement implements CRUDService<Customer> {
                     listProperties.add(customerType);
                     String customerAddress = inputCustomerAddress();
                     listProperties.add(customerAddress);
-                    String[] customerInfo = listProperties.toArray(new String[0]);
+                    String[] customerInfo = listProperties.toArray(new String[listProperties.size()]);
                     Customer customer = new Customer(customerInfo);
                     customerList.set(i, customer);
                     funcWritingReading.writeToFile("Customer.csv", customerList, false);

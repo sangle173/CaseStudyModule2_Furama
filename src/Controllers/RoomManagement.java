@@ -45,7 +45,8 @@ public class RoomManagement implements CRUDService<Room> {
         }
         int count = 1;
         for (Room room : roomTreeSet) {
-            System.out.println(count + ".\t" + room.showInfo());
+            System.out.println("|OrderNo|**|ServiceID|**|ServiceName|**|UseArea|**|RentalPrice|**|MaxCustomer|**|RentalType|**|FreeService|");
+            System.out.println("\t" + count + "\t\t" + room.showInfo());
             count++;
         }
     }
@@ -78,7 +79,7 @@ public class RoomManagement implements CRUDService<Room> {
             list.add(0, serviceId);
             String freeService = serviceManagement.inputFreeService();
             list.add(freeService);
-            String[] roomInfo = list.toArray(new String[0]);
+            String[] roomInfo = list.toArray(new String[list.size()]);
             Room room = new Room(roomInfo);
             roomList.add(room);
             System.out.println("Do you want to continue (Y/N)? User chooses Y to continues, if you chooses N, the program returns main screen\n" +

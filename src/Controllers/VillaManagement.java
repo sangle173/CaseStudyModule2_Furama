@@ -68,10 +68,11 @@ public class VillaManagement implements CRUDService<Villa> {
     @Override
     public void add() {
         List<Villa> villaList = new ArrayList<>();
-        List<String> list = serviceManagement.addProperties();
+        List<String> list;
         boolean exit = false;
         do {
             String serviceId = inputServiceId();
+            list = serviceManagement.addProperties();
             list.add(0, serviceId);
             String roomStandard = serviceManagement.inputRoomStandard();
             list.add(roomStandard);
@@ -81,7 +82,7 @@ public class VillaManagement implements CRUDService<Villa> {
             list.add(areaOfPool);
             String noOfFloors = serviceManagement.inputNoOfFloors();
             list.add(noOfFloors);
-            String[] villaInfo = list.toArray(new String[0]);
+            String[] villaInfo = list.toArray(new String[list.size()]);
             Villa villa = new Villa(villaInfo);
             villaList.add(villa);
             System.out.println("Do you want to continue (Y/N)? User chooses Y to continues, if you chooses N, the program returns main screen\n" +
